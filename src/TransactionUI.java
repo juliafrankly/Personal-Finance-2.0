@@ -49,7 +49,7 @@ public class TransactionUI {
             List<Transaction> filtered = TransactionManager.getTransactionsByDate(date);
             displayTransactionsWithSummary(filtered, "dag: " + dateString);
         } catch (DateTimeParseException e) {
-            System.out.println("Felaktigt datumformat! Använd format: yyyy-MM-dd");
+            System.out.println("Felaktigt datumformat! Använd formatet: yyyy-MM-dd");
         }
     }
 
