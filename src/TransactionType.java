@@ -18,6 +18,10 @@ public enum TransactionType {
     }
 
     public static TransactionType fromString(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Transaktionstyp kan inte vara null");
+        }
+
         for (TransactionType type : values()) {
             if (type.displayName.equalsIgnoreCase(input) || type.name().equalsIgnoreCase(input)) {
                 return type;

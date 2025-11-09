@@ -99,7 +99,7 @@ public class Transaction {
         return type + " | " +
                 "Summa: " + amount + " kr | " +
                 "Kommentar: " + comment + " | " +
-                "Datum: " + date + " | " +
+                "Datum: " + date.format(DATE_FORMAT) + " | " +
                 "ID: " + id;
     }
 }

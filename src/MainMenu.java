@@ -5,9 +5,9 @@ public class MainMenu {
     private static boolean running = true;
 
     public static void main(String[] args) {
-        System.out.println("╔════════════════════════════════════╗");
-        System.out.println("║   Välkommen till Ekonomihanteraren ║");
-        System.out.println("╚════════════════════════════════════╝");
+        System.out.println("╔═══════════════════════════════════╗");
+        System.out.println("║  Välkommen till din ekonomi-app!  ║");
+        System.out.println("╚═══════════════════════════════════╝");
 
         while (running) {
             displayMainMenu();
