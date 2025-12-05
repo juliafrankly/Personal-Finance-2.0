@@ -8,9 +8,13 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class TransactionUI {
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public static void displayAllTransactions() {
+    public TransactionUI(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public void displayAllTransactions() {
         if (TransactionManager.isEmpty()) {
             System.out.println("\nInga transaktioner registrerade än.");
             return;
@@ -23,7 +27,7 @@ public class TransactionUI {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    private static void displayTransactionsWithSummary(List<Transaction> transactions, String period) {
+    private void displayTransactionsWithSummary(List<Transaction> transactions, String period) {
         if (transactions.isEmpty()) {
             System.out.println("\nInga transaktioner hittades för " + period);
             return;
@@ -40,7 +44,7 @@ public class TransactionUI {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public static void viewByDay() {
+    public void viewByDay() {
         System.out.print("\nAnge datum (format: yyyy-MM-dd): ");
         String dateString = scanner.nextLine().trim();
 
@@ -53,7 +57,7 @@ public class TransactionUI {
         }
     }
 
-    public static void viewByWeek() {
+    public void viewByWeek() {
         System.out.print("\nAnge år och veckonummer (format: yyyy-VV, t.ex. 2024-15): ");
         String weekInput = scanner.nextLine().trim();
 
@@ -85,7 +89,7 @@ public class TransactionUI {
         }
     }
 
-    public static void viewByMonth() {
+    public void viewByMonth() {
         System.out.print("\nAnge månad och år (format: yyyy-MM): ");
         String monthInput = scanner.nextLine().trim();
 
@@ -99,7 +103,7 @@ public class TransactionUI {
         }
     }
 
-    public static void viewByYear() {
+    public void viewByYear() {
         System.out.print("\nAnge år (format: yyyy): ");
         String yearInput = scanner.nextLine().trim();
 
@@ -117,14 +121,14 @@ public class TransactionUI {
         }
     }
 
-    public static void viewByType() {
+    public void viewByType() {
         System.out.println("\nVälj typ:");
         System.out.println("1. Inkomster");
         System.out.println("2. Utgifter");
         System.out.print("Ditt val: ");
 
         String choice = scanner.nextLine().trim();
-        TransactionType type = null;
+        TransactionType type;
 
         switch (choice) {
             case "1":
@@ -142,14 +146,14 @@ public class TransactionUI {
         displayTransactionsWithSummary(filtered, type.toString());
     }
 
-    public static void displayBalance() {
+    public void displayBalance() {
         double balance = TransactionManager.calculateBalance();
         System.out.println("\n○-○-○-○-○-○ Aktuell Balans ○-○-○-○-○-○");
         System.out.printf("Balans: %.2f kr\n", balance);
         System.out.println("○-○-○-○-○-○-○-○-○-○-○-○-○-○-○-○-○-○-○-○-○");
     }
 
-    public static void addTransaction() {
+    public void addTransaction() {
         try {
             System.out.println("\n~~~~~~~~~ Lägg till transaktion ~~~~~~~~~");
 
@@ -198,7 +202,7 @@ public class TransactionUI {
         }
     }
 
-    public static void removeTransaction() {
+    public void removeTransaction() {
         if (TransactionManager.isEmpty()) {
             System.out.println("\nDet finns inga transaktioner att ta bort!");
             return;

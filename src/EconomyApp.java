@@ -1,59 +1,31 @@
 import java.util.Scanner;
 
-class EconomyApp {
+public class EconomyApp {
     private final Scanner scanner;
-    private final MenuDisplay menuDisplay;
-    private final MenuHandler menuHandler;
-    private boolean running;
+    private final TransactionUI transactionUI;
 
     public EconomyApp() {
         this.scanner = new Scanner(System.in);
-        this.menuDisplay = new MenuDisplay();
-        this.menuHandler = new MenuHandler(scanner);
-        this.running = true;
+        this.transactionUI = new TransactionUI(scanner);
     }
 
     public void start() {
-        menuDisplay.displayWelcome();
+        displayWelcome();
 
-        while (running) {
-            menuDisplay.displayMainMenu();
-            handleChoice(scanner.nextLine().trim());
-        }
+        MainMenu mainMenu = new MainMenu(scanner, transactionUI);
+        mainMenu.show();
 
-        menuDisplay.displayGoodbye();
+        displayGoodbye();
+        scanner.close();
     }
 
-    private void handleChoice(String choice) {
-        switch (choice) {
-            case "1":
-                menuHandler.handleAddTransaction();
-                break;
-            case "2":
-                menuHandler.handleRemoveTransaction();
-                break;
-            case "3":
-                menuHandler.handleDisplayAllTransactions();
-                break;
-            case "4":
-                handlePeriodMenu();
-                break;
-            case "5":
-                menuHandler.handleViewByType();
-                break;
-            case "6":
-                menuHandler.handleDisplayBalance();
-                break;
-            case "0":
-                running = false;
-                break;
-            default:
-                System.out.println("Ogiltigt val! Försök igen.");
-        }
+    private void displayWelcome() {
+        System.out.println("╔═══════════════════════════════════╗");
+        System.out.println("║  Välkommen till din ekonomi-app!  ║");
+        System.out.println("╚═══════════════════════════════════╝");
     }
 
-    private void handlePeriodMenu() {
-        PeriodMenu periodMenu = new PeriodMenu(scanner, menuHandler);
-        periodMenu.show();
+    private void displayGoodbye() {
+        System.out.println("\nTack för att du använde programmet!");
     }
 }
